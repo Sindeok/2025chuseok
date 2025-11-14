@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>추석 맞이 인사</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #293554 0, #05030a 55%, #01010a 100%);
+      color: #fdfdfd;
+      overflow: hidden;
+    }
+
+    /* 배경 별 */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.8) 0, transparent 50%),
+        radial-gradient(1px 1px at 80% 30%, rgba(255,255,255,0.6) 0, transparent 50%),
+        radial-gradient(1px 1px at 50% 80%, rgba(255,255,255,0.7) 0, transparent 50%),
+        radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.5) 0, transparent 50%);
+      opacity: 0.8;
+      z-index: -2;
+    }
+
+    .scene {
+      position: relative;
+      width: min(900px, 100%);
+      height: min(600px, 100vh);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* 보름달 */
+    .moon {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff7d6 0, #f7de88 45%, #f0c95e 70%, #c9963b 100%);
+      box-shadow:
+        0 0 40px rgba(255, 248, 200, 0.75),
+        0 0 100px rgba(255, 230, 150, 0.7);
+      animation: moon-glow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes moon-glow {
+      from {
+        box-shadow:
+          0 0 35px rgba(255, 248, 200, 0.6),
+          0 0 80px rgba(255, 230, 150, 0.6);
+      }
+      to {
+        box-shadow:
+          0 0 55px rgba(255, 248, 200, 0.9),
+          0 0 130px rgba(255, 230, 150, 0.9);
+      }
+    }
+
+    /* 캐릭터 영역 */
+    .character-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+      z-index: 1;
+    }
+
+    .character {
+      width: min(260px, 70vw);
+      animation: float 3.5s ease-in-out infinite;
+      image-rendering: auto;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* 바닥 그림자 */
+    .ground-shadow {
+      width: 40%;
+      max-width: 320px;
+      height: 40px;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.45), transparent 70%);
+      filter: blur(2px);
+      transform: translateY(-14px);
+      z-index: 0;
+    }
+
+    .text-box {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      padding: 0.9rem 1.4rem;
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.7)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      max-width: min(90vw, 600px);
+    }
+
+    .title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      font-size: clamp(0.9rem, 2.3vw, 1.05rem);
+      opacity: 0.9;
+    }
+
+    .highlight {
+      color: #ffe66d;
+      font-weight: 700;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 600px) {
+      .scene {
+        height: 100vh;
+        padding-inline: 0.8rem;
+      }
+
+      .moon {
+        width: 170px;
+        height: 170px;
+        top: 5%;
+      }
+
+      .text-box {
+        bottom: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <!-- 보름달 -->
+    <div class="moon" aria-hidden="true"></div>
+
+    <!-- 캐릭터 -->
+    <section class="character-wrapper" aria-label="추석 인사 캐릭터">
+      <!-- 👉 여기 src 경로를 네 이미지 이름/폴더에 맞게 수정해줘 -->
+      <img
+        src="images/character.png"
+        alt="추석을 맞이한 늑대인간 캐릭터"
+        class="character"
+      />
+      <div class="ground-shadow" aria-hidden="true"></div>
+    </section>
+
+    <!-- 인사 문구 -->
+    <section class="text-box">
+      <div class="title">
+        <span class="highlight">풍요로운 추석,</span> 행복이 가득하길 🌕
+      </div>
+      <p class="subtitle">
+        둥근 보름달처럼 당신의 한 해도 <span class="highlight">가득 찬 행운</span>으로 빛나길 바라요.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
